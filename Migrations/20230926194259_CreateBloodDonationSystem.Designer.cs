@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230926170906_CreateBloodDonationSystem")]
+    [Migration("20230926194259_CreateBloodDonationSystem")]
     partial class CreateBloodDonationSystem
     {
         /// <inheritdoc />
@@ -52,8 +52,8 @@ namespace BloodDonationSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("InventoryBloodID")
-                        .HasColumnType("int");
+                    b.Property<string>("InventoryBloodGroup")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -61,41 +61,34 @@ namespace BloodDonationSystem.Migrations
 
                     b.HasKey("DonorID");
 
-                    b.HasIndex("InventoryBloodID");
+                    b.HasIndex("InventoryBloodGroup");
 
                     b.ToTable("Donors");
                 });
 
             modelBuilder.Entity("BloodDonationSystem.Model.Inventory", b =>
                 {
-                    b.Property<int>("BloodID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BloodID"));
-
                     b.Property<string>("BloodGroup")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("BloodID");
+                    b.HasKey("BloodGroup");
 
-                    b.ToTable("Inventory");
+                    b.ToTable("Inventories");
                 });
 
             modelBuilder.Entity("BloodDonationSystem.Model.Donor", b =>
                 {
                     b.HasOne("BloodDonationSystem.Model.Inventory", null)
-                        .WithMany("Donors")
-                        .HasForeignKey("InventoryBloodID");
+                        .WithMany("Donor")
+                        .HasForeignKey("InventoryBloodGroup");
                 });
 
             modelBuilder.Entity("BloodDonationSystem.Model.Inventory", b =>
                 {
-                    b.Navigation("Donors");
+                    b.Navigation("Donor");
                 });
 #pragma warning restore 612, 618
         }

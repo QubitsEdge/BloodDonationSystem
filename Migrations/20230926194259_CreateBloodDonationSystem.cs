@@ -12,17 +12,15 @@ namespace BloodDonationSystem.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Inventory",
+                name: "Inventories",
                 columns: table => new
                 {
-                    BloodID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BloodGroup = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BloodGroup = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory", x => x.BloodID);
+                    table.PrimaryKey("PK_Inventories", x => x.BloodGroup);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,22 +34,22 @@ namespace BloodDonationSystem.Migrations
                     ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InventoryBloodID = table.Column<int>(type: "int", nullable: true)
+                    InventoryBloodGroup = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Donors", x => x.DonorID);
                     table.ForeignKey(
-                        name: "FK_Donors_Inventory_InventoryBloodID",
-                        column: x => x.InventoryBloodID,
-                        principalTable: "Inventory",
-                        principalColumn: "BloodID");
+                        name: "FK_Donors_Inventories_InventoryBloodGroup",
+                        column: x => x.InventoryBloodGroup,
+                        principalTable: "Inventories",
+                        principalColumn: "BloodGroup");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Donors_InventoryBloodID",
+                name: "IX_Donors_InventoryBloodGroup",
                 table: "Donors",
-                column: "InventoryBloodID");
+                column: "InventoryBloodGroup");
         }
 
         /// <inheritdoc />
@@ -61,7 +59,7 @@ namespace BloodDonationSystem.Migrations
                 name: "Donors");
 
             migrationBuilder.DropTable(
-                name: "Inventory");
+                name: "Inventories");
         }
     }
 }

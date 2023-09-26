@@ -5,11 +5,13 @@ namespace BloodDonationSystem.Model
 {
     public class Inventory
     {
+
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int BloodID { get; set; }
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int BloodID { get; set; }
         public string BloodGroup { get; set; }
         public int Quantity { get; set; }
-        public List<Donor> Donors { get; set; } = new List<Donor>();
+        public List<Donor> Donor { get; set; } = new List<Donor>();
     }
 }

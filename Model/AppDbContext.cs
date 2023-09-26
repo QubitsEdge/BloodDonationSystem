@@ -3,7 +3,7 @@
 namespace BloodDonationSystem.Model
 {
     public class AppDbContext : DbContext
-    { 
+    {
 
         public AppDbContext() : base()
         {
@@ -26,9 +26,10 @@ namespace BloodDonationSystem.Model
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Donor>().Property(x => x.DonorID).HasDefaultValueSql("NEWID()");
+            
         }
 
-        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Donor> Donors { get; set; }
     }
 }
