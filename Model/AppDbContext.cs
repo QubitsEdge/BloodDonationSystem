@@ -20,5 +20,15 @@ namespace BloodDonationSystem.Model
 
             optionsBuilder.UseSqlServer(connectionString);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Donor>().Property(x => x.DonorID).HasDefaultValueSql("NEWID()");
+        }
+
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<Donor> Donors { get; set; }
     }
 }

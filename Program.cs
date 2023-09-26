@@ -4,6 +4,23 @@ namespace BloodDonationSystem
     {
         public static void Main(string[] args)
         {
+            /*var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllers();
+
+            var app = builder.Build();
+
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                            name: "default",
+                            pattern: "{controller=Donor}/{action=GetAll}/{id?}");
+            
+
+            app.Run();*/
+
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
