@@ -22,7 +22,7 @@ namespace BloodDonationSystem.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Donar>().Property(x => x.Id).HasDefaultValue("NewGuid");
+            modelBuilder.Entity<Donar>().Property(x => x.DonarId).HasDefaultValueSql("NEWID()");
         }
 
         public DbSet<Donar> Donar { get; set; }

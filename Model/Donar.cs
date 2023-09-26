@@ -2,7 +2,7 @@
 {
     public class Donar
     {
-        public Guid Id { get; set; } = new Guid();
+        public Guid DonarId { get; set; } 
         public string? firstName { get; set; }
         public string? lastName { get; set; }
         public string? bloodGroup { get; set; }
