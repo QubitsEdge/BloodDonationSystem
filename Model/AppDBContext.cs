@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Drawing;
 
 namespace BloodDonationSystem.Model
 {
-    public class AppDBContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public AppDBContext() : base()
-        { 
-        
+
+        public AppDbContext() : base()
+        {
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -16,7 +16,7 @@ namespace BloodDonationSystem.Model
 
             var configSection = configBuilder.GetSection("ConnectionStrings");
 
-            var connectionString = configSection["Hbdonation"];
+            var connectionString = configSection["BloodDonationConnection"];
 
             optionsBuilder.UseSqlServer(connectionString);
         }
@@ -24,17 +24,12 @@ namespace BloodDonationSystem.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Donar>().Property(x => x.DonarId).HasDefaultValueSql("NEWID()");
-            modelBuilder.Entity<Donar>()
-                .HasOne(d => d.Inventory) // Each Donar belongs to one Inventory
-                .WithMany(i => i.DonarList) // Each Inventory can have multiple Donar
-                .HasForeignKey(d => d.BloodGroup) // Define the foreign key
-                .HasPrincipalKey(i => i.BloodGroup); // Reference the primary key in Inventory
+
+            modelBuilder.Entity<Donor>().Property(x => x.DonorID).HasDefaultValueSql("NEWID()");
+            
         }
 
-        public DbSet<Donar> Donar { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<Donor> Donors { get; set; }
     }
-
-    
 }

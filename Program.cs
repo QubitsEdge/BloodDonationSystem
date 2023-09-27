@@ -30,10 +30,33 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
+<<<<<<< HEAD
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "BloodDonationSystem API v1");
         c.RoutePrefix = "swagger";
     });
 }
+=======
+        public static void Main(string[] args)
+        {
+            /*var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllers();
+
+            var app = builder.Build();
+
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                            name: "default",
+                            pattern: "{controller=Donor}/{action=GetAll}/{id?}");
+            
+
+            app.Run();*/
+
+
+            var builder = WebApplication.CreateBuilder(args);
+>>>>>>> Ahmad
 
 app.UseHttpsRedirection();
 
