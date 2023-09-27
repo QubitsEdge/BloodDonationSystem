@@ -10,15 +10,15 @@ namespace BloodDonationSystem.Controllers
     {
         private readonly IInventoryRepository _inventoryRepository;
 
-        public InventoryController(IInventoryRepository inventoryRepository)
+        /*public InventoryController(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
-        }
+        }*/
 
-        /*public InventoryController()
+        public InventoryController()
         {
             _inventoryRepository = new InventoryRepository();
-        }*/
+        }
 
         // GET: api/Inventory
         [HttpGet]
@@ -38,8 +38,8 @@ namespace BloodDonationSystem.Controllers
 
 
         // POST: api/Inventory
-        [HttpPost]
-        public ActionResult<Inventory> CreateInventory([FromBody] Inventory inventory)
+        /*[HttpPost]
+        public ActionResult<Inventory> InsertInventory([FromBody] Inventory inventory)
         {
             
             var existingInventory = _inventoryRepository.GetByBloodGroup(inventory.BloodGroup);
@@ -56,7 +56,7 @@ namespace BloodDonationSystem.Controllers
 
             _inventoryRepository.Save();
             return CreatedAtAction(nameof(GetInventory), new { bloodGroup = inventory.BloodGroup }, inventory);
-        }
+        }*/
 
 
         // PUT: api/Inventory/5

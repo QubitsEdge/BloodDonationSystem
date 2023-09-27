@@ -10,31 +10,31 @@ namespace BloodDonationSystem.Controllers
     [ApiController]
     public class DonorController : ControllerBase
     {
-        private readonly DonorRepository _donorRepository;
+        private readonly DonarRepository _donorRepository;
 
         public DonorController()
         {
-            _donorRepository = new DonorRepository();
+            _donorRepository = new DonarRepository();
         }
 
 
         [HttpGet("{id}")]
-        public ActionResult<Donor> GetById(Guid id)
+        public ActionResult<Donar> GetById(Guid id)
         {
-            Donor donor = _donorRepository.GetByGuid(id);
+            Donar donor = _donorRepository.GetByGuid(id);
             return donor;
         }
 
         [HttpGet]
-        public ActionResult<List<Donor>> GetAll()
+        public ActionResult<List<Donar>> GetAll()
         {
             return _donorRepository.GetAll();
         }
 
         [HttpPost]
-        public void Add(Donor donor)
+        public void Add(Donar donar)
         {
-            _donorRepository.AddDonor(donor);
+            _donorRepository.AddDonor(donar);
         }
 
        /* [HttpGet("{id}")]
@@ -50,17 +50,24 @@ namespace BloodDonationSystem.Controllers
         }*/
 
         [HttpPut]
-        public void EditDonor(Donor donor)
+        public void EditDonor(Donar donar)
         {
-            Console.WriteLine(donor.DonorID);
-            _donorRepository.UpdateDonor(donor);
+            Console.WriteLine(donar.DonarId);
+            _donorRepository.UpdateDonor(donar);
         }
 
         [HttpDelete("{id}")]
         public void DeleteDonor(Guid id)
         {
-            Donor donorToDelete = _donorRepository.GetByGuid(id);
+            Donar donorToDelete = _donorRepository.GetByGuid(id);
             _donorRepository.RemoveDonor(donorToDelete);
+        }
+
+        [HttpGet("bloodgroup/{BloodGroup}", Name = "GetByBloodGroup")]
+        public ActionResult<List<Donar>> GetDonarByBloodGroup(string BloodGroup)
+        {
+            List<Donar> donarList = _donorRepository.GetDonarByBloodGroup(BloodGroup);
+            return donarList;
         }
     }
 }

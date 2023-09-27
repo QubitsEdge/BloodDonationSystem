@@ -1,35 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
 
 namespace BloodDonationSystem.Model
 {
-    public class AppDbContext : DbContext
+    public class AppDBContext : DbContext
     {
-
-        public AppDbContext() : base()
+        public AppDBContext() : base()
         {
-
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var configBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-
+            var configBuilder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             var configSection = configBuilder.GetSection("ConnectionStrings");
-
-            var connectionString = configSection["BloodDonationConnection"];
-
+            var connectionString = configSection["Hbdonation"];
             optionsBuilder.UseSqlServer(connectionString);
         }
 
+
+        public DbSet<Donar> Donar { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Donor>().Property(x => x.DonorID).HasDefaultValueSql("NEWID()");
-            
+            modelBuilder.Entity<Donar>().Property(x => x.DonarId).HasDefaultValueSql("NEWID()");
+
+            /*modelBuilder.Entity<Inventory>()
+                .HasMany(i => i.DonarList)
+                .WithOne(d => d.Inventory)
+                .HasForeignKey(d => d.BloodGroup);*/
         }
 
-        public DbSet<Inventory> Inventory { get; set; }
-        public DbSet<Donor> Donors { get; set; }
+
     }
 }

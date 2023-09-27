@@ -12,6 +12,23 @@ namespace BloodDonationSystem.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Donar",
+                columns: table => new
+                {
+                    DonarId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BloodGroup = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Donar", x => x.DonarId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Inventory",
                 columns: table => new
                 {
@@ -22,33 +39,6 @@ namespace BloodDonationSystem.Migrations
                 {
                     table.PrimaryKey("PK_Inventory", x => x.BloodGroup);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Donar",
-                columns: table => new
-                {
-                    DonarId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BloodGroup = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Donar", x => x.DonarId);
-                    table.ForeignKey(
-                        name: "FK_Donar_Inventory_BloodGroup",
-                        column: x => x.BloodGroup,
-                        principalTable: "Inventory",
-                        principalColumn: "BloodGroup");
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Donar_BloodGroup",
-                table: "Donar",
-                column: "BloodGroup");
         }
 
         /// <inheritdoc />

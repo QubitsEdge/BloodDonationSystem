@@ -14,10 +14,10 @@ namespace BloodDonationSystem.Model
         public string? Email { get; set; }
         public string? Address { get; set; }
 
-        [ForeignKey("BloodGroup")] 
+        //[ForeignKey("BloodGroup")] 
         public string? BloodGroup { get; set; }
 
         // Navigation property for the Inventory to which this Donar belongs
-        public Inventory Inventory { get; set; }
+        //public Inventory Inventory { get; set; }
     }
 }

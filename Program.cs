@@ -1,41 +1,7 @@
-using BloodDonationSystem.Model;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using BloodDonationSystem.Data; // Import the namespace for your repository
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllers();
-
-// Configure your database context
-builder.Services.AddDbContext<AppDBContext>();
-
-// Add the repository service
-builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
-
-// Enable Swagger/OpenAPI
-builder.Services.AddSwaggerGen(c =>
+namespace BloodDonationSystem
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BloodDonationSystem API", Version = "v1" });
-});
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    public class Program
     {
-<<<<<<< HEAD
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "BloodDonationSystem API v1");
-        c.RoutePrefix = "swagger";
-    });
-}
-=======
         public static void Main(string[] args)
         {
             /*var builder = WebApplication.CreateBuilder(args);
@@ -56,12 +22,31 @@ if (app.Environment.IsDevelopment())
 
 
             var builder = WebApplication.CreateBuilder(args);
->>>>>>> Ahmad
 
-app.UseHttpsRedirection();
+            // Add services to the container.
 
-app.UseAuthorization();
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-app.MapControllers();
+            var app = builder.Build();
 
-app.Run();
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+
+            app.MapControllers();
+
+            app.Run();
+        }
+    }
+}

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonationSystem.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(AppDBContext))]
+    partial class AppDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,45 +22,34 @@ namespace BloodDonationSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BloodDonationSystem.Model.Donor", b =>
+            modelBuilder.Entity("BloodDonationSystem.Model.Donar", b =>
                 {
-                    b.Property<Guid>("DonorID")
+                    b.Property<Guid>("DonarId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BloodGroup")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactNo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InventoryBloodGroup")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("DonorID");
+                    b.HasKey("DonarId");
 
-                    b.HasIndex("InventoryBloodGroup");
-
-                    b.ToTable("Donors");
+                    b.ToTable("Donar");
                 });
 
             modelBuilder.Entity("BloodDonationSystem.Model.Inventory", b =>
@@ -68,24 +57,13 @@ namespace BloodDonationSystem.Migrations
                     b.Property<string>("BloodGroup")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BloodGroup");
 
                     b.ToTable("Inventory");
-                });
-
-            modelBuilder.Entity("BloodDonationSystem.Model.Donor", b =>
-                {
-                    b.HasOne("BloodDonationSystem.Model.Inventory", null)
-                        .WithMany("Donor")
-                        .HasForeignKey("InventoryBloodGroup");
-                });
-
-            modelBuilder.Entity("BloodDonationSystem.Model.Inventory", b =>
-                {
-                    b.Navigation("Donor");
                 });
 #pragma warning restore 612, 618
         }
