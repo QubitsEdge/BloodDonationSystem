@@ -46,5 +46,10 @@ namespace BloodDonationSystem.Repository
             _context.Remove(donor); 
             _context.SaveChanges();
         }
+
+        public List<Donor> GetDonorsByBloodGroup(string bloodGroup)
+        {
+            return _context.Donors.ToList().FindAll(donor => donor.BloodGroup == bloodGroup);
+        }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230927134736_CreateBloodDonationSystem")]
+    [Migration("20230927141134_CreateBloodDonationSystem")]
     partial class CreateBloodDonationSystem
     {
         /// <inheritdoc />
@@ -52,16 +52,11 @@ namespace BloodDonationSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InventoryBloodGroup")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DonorID");
-
-                    b.HasIndex("InventoryBloodGroup");
 
                     b.ToTable("Donors");
                 });
@@ -77,18 +72,6 @@ namespace BloodDonationSystem.Migrations
                     b.HasKey("BloodGroup");
 
                     b.ToTable("Inventory");
-                });
-
-            modelBuilder.Entity("BloodDonationSystem.Model.Donor", b =>
-                {
-                    b.HasOne("BloodDonationSystem.Model.Inventory", null)
-                        .WithMany("Donor")
-                        .HasForeignKey("InventoryBloodGroup");
-                });
-
-            modelBuilder.Entity("BloodDonationSystem.Model.Inventory", b =>
-                {
-                    b.Navigation("Donor");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,6 +12,6 @@ namespace BloodDonationSystem.Model
         [Key]
         public string BloodGroup { get; set; }
         public int Quantity { get; set; }
-        public List<Donor> Donor { get; set; } = new List<Donor>();
+        //public List<Donor> Donor { get; set; } = new List<Donor>();
     }
 }

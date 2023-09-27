@@ -18,7 +18,7 @@ namespace BloodDonationSystem.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetById")]
         public ActionResult<Donor> GetById(Guid id)
         {
             Donor donor = _donorRepository.GetByGuid(id);
@@ -61,6 +61,13 @@ namespace BloodDonationSystem.Controllers
         {
             Donor donorToDelete = _donorRepository.GetByGuid(id);
             _donorRepository.RemoveDonor(donorToDelete);
+        }
+
+        [HttpGet("bloodgroup/{BloodGroup}", Name = "GetByBloodGroup")]
+        public ActionResult<List<Donor>> GetDonorsByBloodGroup(string BloodGroup)
+        {
+            List<Donor> donorsList = _donorRepository.GetDonorsByBloodGroup(BloodGroup);
+            return donorsList;
         }
     }
 }
