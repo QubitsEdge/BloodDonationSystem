@@ -8,7 +8,7 @@ namespace BloodDonationSystem.Repository
 
         void UpdateInventory(Inventory inventory);
 
-        List<Inventory> GetInventory();
+        List<Inventory> GetAllInventory();
 
         Inventory GetInventoryByBloodGroup(string bloodGroup);
 

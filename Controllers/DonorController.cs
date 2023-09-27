@@ -26,28 +26,16 @@ namespace BloodDonationSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Donor>> GetAll()
+        public ActionResult<List<Donor>> GetAllDonors()
         {
-            return _donorRepository.GetAll();
+            return _donorRepository.GetAllDonors();
         }
 
         [HttpPost]
-        public void Add(Donor donor)
+        public void AddDonor(Donor donor)
         {
             _donorRepository.AddDonor(donor);
         }
-
-       /* [HttpGet("{id}")]
-        public ActionResult<Donor> Edit(Guid id)
-        {
-            if (ModelState.IsValid)
-            {
-                Donor donorToUpdate = _donorRepository.GetByGuid(id);
-                RedirectToAction("EditDonor", donorToUpdate);
-            }
-
-            return NotFound();
-        }*/
 
         [HttpPut]
         public void EditDonor(Donor donor)

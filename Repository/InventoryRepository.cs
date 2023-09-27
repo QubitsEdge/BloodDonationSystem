@@ -21,7 +21,7 @@ namespace BloodDonationSystem.Repository
             _context.SaveChanges();
         }
 
-        public List<Inventory> GetInventory()
+        public List<Inventory> GetAllInventory()
         {
             return _context.Inventory.ToList();
         }

@@ -21,7 +21,7 @@ namespace BloodDonationSystem.Repository
             return _context.Donors.ToList().FirstOrDefault(donor => donor.DonorID == id) ?? new Donor();
         }
 
-        public List<Donor> GetAll()
+        public List<Donor> GetAllDonors()
         {
             return _context.Donors.ToList();
         }
@@ -37,7 +37,7 @@ namespace BloodDonationSystem.Repository
             donorToUpdate.ContactNo = donor.ContactNo;
             donorToUpdate.Address = donor.Address;
 
-            //_context.Update(donor);
+            
             _context.SaveChanges();
         }
 

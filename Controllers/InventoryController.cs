@@ -17,13 +17,13 @@ namespace BloodDonationSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Inventory>> GetInventory()
+        public ActionResult<List<Inventory>> GetAllInventory()
         {
-            return _inventoryRepository.GetInventory();
+            return _inventoryRepository.GetAllInventory();
         }
 
         [HttpGet("{bloodGroup}")]
-        public ActionResult<Inventory> GetInventorByBloodGroup(string bloodGroup)
+        public ActionResult<Inventory> GetInventoryByBloodGroup(string bloodGroup)
         {
             return _inventoryRepository.GetInventoryByBloodGroup(bloodGroup);
         }

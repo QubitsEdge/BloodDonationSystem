@@ -25,7 +25,7 @@ namespace BloodDonationSystem.Model
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Donor>().Property(x => x.DonorID).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<Donor>().Property(donor => donor.DonorID).HasDefaultValueSql("NEWID()");
             
         }
 

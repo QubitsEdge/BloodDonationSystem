@@ -7,7 +7,7 @@ namespace BloodDonationSystem.Repository
         Donor GetByGuid(Guid id);
         void AddDonor(Donor donor);
 
-        List<Donor> GetAll();
+        List<Donor> GetAllDonors();
 
         void RemoveDonor(Donor donor);
 
