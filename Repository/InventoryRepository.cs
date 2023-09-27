@@ -64,7 +64,7 @@ namespace BloodDonationSystem.Model
                 _context.Inventory.Remove(inventoryToDelete);
             }
         }
-
         
+
     }
 }

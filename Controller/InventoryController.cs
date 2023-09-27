@@ -29,13 +29,13 @@ namespace BloodDonationSystem.Controllers
         }
 
         // GET: api/Inventory/5
-        [HttpGet("{id}")]
-        public ActionResult<Inventory> GetInventory(string id)
+        [HttpGet("{BloodGroup}")]
+        public ActionResult<Inventory> GetInventory([FromRoute] string BloodGroup)
         {
-            var inventory = _inventoryRepository.GetById(id);
-            
+            var inventory = _inventoryRepository.GetByBloodGroup(BloodGroup);
             return inventory;
         }
+
 
         // POST: api/Inventory
         [HttpPost]
@@ -61,11 +61,11 @@ namespace BloodDonationSystem.Controllers
 
         // PUT: api/Inventory/5
         [HttpPut("{id}")]
-        public IActionResult UpdateInventory(string id, [FromBody] Inventory inventory)
+        public IActionResult UpdateInventory(string BloodGroup, [FromBody] Inventory inventory)
         {
             
 
-            var existingInventory = _inventoryRepository.GetById(id);
+            var existingInventory = _inventoryRepository.GetById(BloodGroup);
             
             existingInventory.BloodGroup = inventory.BloodGroup;
             existingInventory.Quantity = inventory.Quantity;
@@ -77,13 +77,13 @@ namespace BloodDonationSystem.Controllers
         }
 
         // DELETE: api/Inventory/5
-        [HttpDelete("{id}")]
-        public IActionResult DeleteInventory(string id)
+        [HttpDelete("{BloodGroup}")]
+        public IActionResult DeleteInventory(string BloodGroup)
         {
-            var inventory = _inventoryRepository.GetById(id);
+            var inventory = _inventoryRepository.GetById(BloodGroup);
            
 
-            _inventoryRepository.Delete(id);
+            _inventoryRepository.Delete(BloodGroup);
             _inventoryRepository.Save();
 
             return NoContent(); 

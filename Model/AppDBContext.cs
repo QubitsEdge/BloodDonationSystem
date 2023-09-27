@@ -26,10 +26,10 @@ namespace BloodDonationSystem.Model
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Donar>().Property(x => x.DonarId).HasDefaultValueSql("NEWID()");
             modelBuilder.Entity<Donar>()
-            .HasOne(d => d.Inventory)
-            .WithMany(i => i.DonarList)
-            .HasForeignKey(d => d.BloodGroup)
-            .HasPrincipalKey(i => i.BloodGroup);
+                .HasOne(d => d.Inventory) // Each Donar belongs to one Inventory
+                .WithMany(i => i.DonarList) // Each Inventory can have multiple Donar
+                .HasForeignKey(d => d.BloodGroup) // Define the foreign key
+                .HasPrincipalKey(i => i.BloodGroup); // Reference the primary key in Inventory
         }
 
         public DbSet<Donar> Donar { get; set; }

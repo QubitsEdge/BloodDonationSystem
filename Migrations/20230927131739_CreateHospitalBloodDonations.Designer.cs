@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationSystem.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230926185026_CreateHospitalBloodDonations")]
+    [Migration("20230927131739_CreateHospitalBloodDonations")]
     partial class CreateHospitalBloodDonations
     {
         /// <inheritdoc />
@@ -35,22 +35,24 @@ namespace BloodDonationSystem.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BloodGroup")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ContactNo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("bloodGroup")
+                    b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("contactNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lastName")
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DonarId");
+
+                    b.HasIndex("BloodGroup");
 
                     b.ToTable("Donar");
                 });
@@ -67,6 +69,20 @@ namespace BloodDonationSystem.Migrations
                     b.HasKey("BloodGroup");
 
                     b.ToTable("Inventory");
+                });
+
+            modelBuilder.Entity("BloodDonationSystem.Model.Donar", b =>
+                {
+                    b.HasOne("BloodDonationSystem.Model.Inventory", "Inventory")
+                        .WithMany("DonarList")
+                        .HasForeignKey("BloodGroup");
+
+                    b.Navigation("Inventory");
+                });
+
+            modelBuilder.Entity("BloodDonationSystem.Model.Inventory", b =>
+                {
+                    b.Navigation("DonarList");
                 });
 #pragma warning restore 612, 618
         }
