@@ -2,7 +2,7 @@
 
 namespace BloodDonationSystem.Repository
 {
-    public interface IDonoRepository
+    public interface IDonorRepository
     {
         Donor GetByGuid(Guid id);
         void AddDonor(Donor donor);

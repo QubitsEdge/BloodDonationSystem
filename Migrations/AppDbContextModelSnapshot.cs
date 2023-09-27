@@ -73,7 +73,7 @@ namespace BloodDonationSystem.Migrations
 
                     b.HasKey("BloodGroup");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("BloodDonationSystem.Model.Donor", b =>

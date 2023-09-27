@@ -29,7 +29,7 @@ namespace BloodDonationSystem.Model
             
         }
 
-        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
         public DbSet<Donor> Donors { get; set; }
     }
 }

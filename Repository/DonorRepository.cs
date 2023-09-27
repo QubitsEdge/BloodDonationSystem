@@ -2,7 +2,7 @@
 
 namespace BloodDonationSystem.Repository
 {
-    public class DonorRepository : IDonoRepository
+    public class DonorRepository : IDonorRepository
     {
         private readonly AppDbContext _context;
         public DonorRepository() { 

@@ -12,7 +12,7 @@ namespace BloodDonationSystem.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Inventories",
+                name: "Inventory",
                 columns: table => new
                 {
                     BloodGroup = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -20,7 +20,7 @@ namespace BloodDonationSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventories", x => x.BloodGroup);
+                    table.PrimaryKey("PK_Inventory", x => x.BloodGroup);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,9 +40,9 @@ namespace BloodDonationSystem.Migrations
                 {
                     table.PrimaryKey("PK_Donors", x => x.DonorID);
                     table.ForeignKey(
-                        name: "FK_Donors_Inventories_InventoryBloodGroup",
+                        name: "FK_Donors_Inventory_InventoryBloodGroup",
                         column: x => x.InventoryBloodGroup,
-                        principalTable: "Inventories",
+                        principalTable: "Inventory",
                         principalColumn: "BloodGroup");
                 });
 
@@ -59,7 +59,7 @@ namespace BloodDonationSystem.Migrations
                 name: "Donors");
 
             migrationBuilder.DropTable(
-                name: "Inventories");
+                name: "Inventory");
         }
     }
 }

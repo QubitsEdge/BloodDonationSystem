@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230926194259_CreateBloodDonationSystem")]
+    [Migration("20230927134736_CreateBloodDonationSystem")]
     partial class CreateBloodDonationSystem
     {
         /// <inheritdoc />
@@ -76,7 +76,7 @@ namespace BloodDonationSystem.Migrations
 
                     b.HasKey("BloodGroup");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("BloodDonationSystem.Model.Donor", b =>
