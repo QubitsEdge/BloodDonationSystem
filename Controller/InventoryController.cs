@@ -30,7 +30,7 @@ namespace BloodDonationSystem.Controllers
 
         // GET: api/Inventory/5
         [HttpGet("{BloodGroup}")]
-        public ActionResult<Inventory> GetInventory([FromRoute] string BloodGroup)
+        public ActionResult<Inventory> GetInventoryUsingBloodGroup([FromRoute] string BloodGroup)
         {
             var inventory = _inventoryRepository.GetByBloodGroup(BloodGroup);
             return inventory;
