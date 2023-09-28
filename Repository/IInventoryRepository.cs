@@ -2,7 +2,7 @@
 
 namespace BloodDonationSystem.Repository
 {
-    public interface IInventory
+    public interface IInventoryRepository
     {
         void AddInventory(Inventory inventory);
 

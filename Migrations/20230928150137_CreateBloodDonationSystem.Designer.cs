@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230927141134_CreateBloodDonationSystem")]
+    [Migration("20230928150137_CreateBloodDonationSystem")]
     partial class CreateBloodDonationSystem
     {
         /// <inheritdoc />
