@@ -2,8 +2,16 @@ namespace BloodDonationSystem
 {
     public class Program
     {
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
         public static void Main(string[] args)
         {
+            CreateHostBuilder(args).Build().Run();
+
             /*var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
@@ -21,11 +29,14 @@ namespace BloodDonationSystem
             app.Run();*/
 
 
-            var builder = WebApplication.CreateBuilder(args);
+            //var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // Startup.cs
+            
 
-            builder.Services.AddControllers();
+            /*builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -46,7 +57,7 @@ namespace BloodDonationSystem
 
             app.MapControllers();
 
-            app.Run();
+            app.Run();*/
         }
     }
 }

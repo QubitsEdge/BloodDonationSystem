@@ -1,4 +1,5 @@
-﻿using BloodDonationSystem.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using BloodDonationSystem.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -7,14 +8,11 @@ namespace BloodDonationSystem.Repository
     public class DonarRepository : IDonarRepository
     {
         private readonly AppDBContext _dbContext;
-        public DonarRepository()
-        {
-            _dbContext = new AppDBContext();
-        }
         public DonarRepository(AppDBContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
+        
 
         public void AddDonor(Donar donar)
         {

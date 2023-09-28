@@ -7,17 +7,17 @@ namespace BloodDonationSystem.Model
 {
     public class AppDBContext : DbContext
     {
-        public AppDBContext() : base()
+        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var configBuilder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            var configSection = configBuilder.GetSection("ConnectionStrings");
-            var connectionString = configSection["Hbdonation"];
-            optionsBuilder.UseSqlServer(connectionString);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    /*var configBuilder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+        //    var configSection = configBuilder.GetSection("ConnectionStrings");
+        //    var connectionString = configSection["Hbdonation"];
+        //    optionsBuilder.UseSqlServer(connectionString);*/
+        //}
 
 
         public DbSet<Donar> Donar { get; set; }
@@ -28,10 +28,6 @@ namespace BloodDonationSystem.Model
 
             modelBuilder.Entity<Donar>().Property(x => x.DonarId).HasDefaultValueSql("NEWID()");
 
-            /*modelBuilder.Entity<Inventory>()
-                .HasMany(i => i.DonarList)
-                .WithOne(d => d.Inventory)
-                .HasForeignKey(d => d.BloodGroup);*/
         }
 
 

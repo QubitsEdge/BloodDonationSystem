@@ -11,7 +11,7 @@ namespace BloodDonationSystem.Repository
 
         void RemoveDonor(Donar donor);
 
-        List<Donar> GetDonarByBloodGroup(string bloodGroup);    
-
+        List<Donar> GetDonarByBloodGroup(string bloodGroup);
+        void UpdateDonor(Donar donar);
     }
 }

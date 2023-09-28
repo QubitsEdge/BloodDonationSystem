@@ -8,8 +8,6 @@ namespace BloodDonationSystem.Model
         Inventory GetByBloodGroup(string bloodGroup);
         void Update(Inventory inventory);
 
-        //List<Donar> GetDonarsByInventoryId(int inventoryId);
-
         void Insert(Inventory inventory);
         void Save();
         void Delete(string id);

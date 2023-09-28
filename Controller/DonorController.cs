@@ -1,5 +1,6 @@
 ﻿using BloodDonationSystem.Model;
 using BloodDonationSystem.Repository;
+using BloodDonationSystem.UnitOfWorkPatterns;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -10,31 +11,34 @@ namespace BloodDonationSystem.Controllers
     [ApiController]
     public class DonorController : ControllerBase
     {
-        private readonly DonarRepository _donorRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        
+        
+        //private readonly DonarRepository _donorRepository;
 
-        public DonorController()
+        public DonorController(IUnitOfWork unitOfWork)
         {
-            _donorRepository = new DonarRepository();
+            _unitOfWork = unitOfWork;
         }
 
 
         [HttpGet("{id}")]
         public ActionResult<Donar> GetById(Guid id)
         {
-            Donar donor = _donorRepository.GetByGuid(id);
+            Donar donor = _unitOfWork.Donar.GetByGuid(id);
             return donor;
         }
 
         [HttpGet]
         public ActionResult<List<Donar>> GetAll()
         {
-            return _donorRepository.GetAll();
+            return _unitOfWork.Donar.GetAll();
         }
 
         [HttpPost]
         public void Add(Donar donar)
         {
-            _donorRepository.AddDonor(donar);
+            _unitOfWork.Donar.AddDonor(donar);
         }
 
        /* [HttpGet("{id}")]
@@ -53,20 +57,20 @@ namespace BloodDonationSystem.Controllers
         public void EditDonor(Donar donar)
         {
             Console.WriteLine(donar.DonarId);
-            _donorRepository.UpdateDonor(donar);
+            _unitOfWork.Donar.UpdateDonor(donar);
         }
 
         [HttpDelete("{id}")]
         public void DeleteDonor(Guid id)
         {
-            Donar donorToDelete = _donorRepository.GetByGuid(id);
-            _donorRepository.RemoveDonor(donorToDelete);
+            Donar donorToDelete = _unitOfWork.Donar.GetByGuid(id);
+            _unitOfWork.Donar.RemoveDonor(donorToDelete);
         }
 
         [HttpGet("bloodgroup/{BloodGroup}", Name = "GetByBloodGroup")]
         public ActionResult<List<Donar>> GetDonarByBloodGroup(string BloodGroup)
         {
-            List<Donar> donarList = _donorRepository.GetDonarByBloodGroup(BloodGroup);
+            List<Donar> donarList = _unitOfWork.Donar.GetDonarByBloodGroup(BloodGroup);
             return donarList;
         }
     }

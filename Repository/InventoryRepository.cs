@@ -12,12 +12,7 @@ namespace BloodDonationSystem.Model
        
         public InventoryRepository(AppDBContext context)
         {
-            _context = context;
-        }
-
-        public InventoryRepository()
-        {
-            _context = new AppDBContext();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public List<Inventory> GetAll()

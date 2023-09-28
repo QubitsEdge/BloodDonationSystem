@@ -1,6 +1,9 @@
 ﻿using BloodDonationSystem.Model;
+using BloodDonationSystem.Repository;
+using BloodDonationSystem.UnitOfWorkPatterns;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace BloodDonationSystem.Controllers
 {
@@ -8,23 +11,25 @@ namespace BloodDonationSystem.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        private readonly IInventoryRepository _inventoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IInventoryRepository _inventoryRepository;
 
         /*public InventoryController(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
         }*/
 
-        public InventoryController()
+        public InventoryController(IUnitOfWork unitOfWork)
         {
-            _inventoryRepository = new InventoryRepository();
+            _unitOfWork = unitOfWork;
+            //_inventoryRepository = new InventoryRepository();
         }
 
         // GET: api/Inventory
         [HttpGet]
         public List<Inventory> GetInventories()
         {
-            var inventories = _inventoryRepository.GetAll();
+            var inventories = _unitOfWork.Inventory.GetAll();
             return inventories;
         }
 
@@ -32,7 +37,7 @@ namespace BloodDonationSystem.Controllers
         [HttpGet("{BloodGroup}")]
         public ActionResult<Inventory> GetInventoryUsingBloodGroup([FromRoute] string BloodGroup)
         {
-            var inventory = _inventoryRepository.GetByBloodGroup(BloodGroup);
+            var inventory = _unitOfWork.Inventory.GetByBloodGroup(BloodGroup);
             return inventory;
         }
 
@@ -65,13 +70,13 @@ namespace BloodDonationSystem.Controllers
         {
             
 
-            var existingInventory = _inventoryRepository.GetById(BloodGroup);
+            var existingInventory = _unitOfWork.Inventory.GetById(BloodGroup);
             
             existingInventory.BloodGroup = inventory.BloodGroup;
             existingInventory.Quantity = inventory.Quantity;
 
-            _inventoryRepository.Update(existingInventory);
-            _inventoryRepository.Save();
+            _unitOfWork.Inventory.Update(existingInventory);
+            _unitOfWork.Inventory.Save();
 
             return NoContent(); 
         }
@@ -80,11 +85,11 @@ namespace BloodDonationSystem.Controllers
         [HttpDelete("{BloodGroup}")]
         public IActionResult DeleteInventory(string BloodGroup)
         {
-            var inventory = _inventoryRepository.GetById(BloodGroup);
+            var inventory = _unitOfWork.Inventory.GetById(BloodGroup);
            
 
-            _inventoryRepository.Delete(BloodGroup);
-            _inventoryRepository.Save();
+            _unitOfWork.Inventory.Delete(BloodGroup);
+            _unitOfWork.Inventory.Save();
 
             return NoContent(); 
         }
