@@ -5,8 +5,8 @@ namespace BloodDonationSystem.Repository
     public class InventoryRepository : IInventoryRepository
     {
         private AppDbContext _context;
-        public InventoryRepository() {
-            _context = new AppDbContext();
+        public InventoryRepository(AppDbContext context) {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public void AddInventory(Inventory inventory)

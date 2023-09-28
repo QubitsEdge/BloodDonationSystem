@@ -5,8 +5,8 @@ namespace BloodDonationSystem.Repository
     public class DonorRepository : IDonorRepository
     {
         private readonly AppDbContext _context;
-        public DonorRepository() { 
-            _context = new AppDbContext();
+        public DonorRepository(AppDbContext context) { 
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }    
 
 

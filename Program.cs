@@ -2,8 +2,17 @@ namespace BloodDonationSystem
 {
     public class Program
     {
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+           .ConfigureWebHostDefaults(webBuilder =>
+           {
+               webBuilder.UseStartup<Startup>();
+           });
         public static void Main(string[] args)
         {
+            CreateHostBuilder(args).Build().Run();
+
             /*var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
@@ -21,7 +30,10 @@ namespace BloodDonationSystem
             app.Run();*/
 
 
-            var builder = WebApplication.CreateBuilder(args);
+            /*var builder = WebApplication.CreateBuilder(args);
+
+
+
 
             // Add services to the container.
 
@@ -46,7 +58,7 @@ namespace BloodDonationSystem
 
             app.MapControllers();
 
-            app.Run();
+            app.Run();*/
         }
     }
 }

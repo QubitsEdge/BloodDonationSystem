@@ -9,34 +9,40 @@ namespace BloodDonationSystem.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        public InventoryRepository _inventoryRepository;
+        public readonly IUnitOfWork _unitOfWork;
+
+        public InventoryController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+        /*public InventoryRepository _inventoryRepository;
 
         public InventoryController()
         {
             _inventoryRepository = new InventoryRepository();
-        }
+        }*/
 
         [HttpGet]
         public ActionResult<List<Inventory>> GetAllInventory()
         {
-            return _inventoryRepository.GetAllInventory();
+            return _unitOfWork.inventoryRepository.GetAllInventory();
         }
 
         [HttpGet("{bloodGroup}")]
         public ActionResult<Inventory> GetInventoryByBloodGroup(string bloodGroup)
         {
-            return _inventoryRepository.GetInventoryByBloodGroup(bloodGroup);
+            return _unitOfWork.inventoryRepository.GetInventoryByBloodGroup(bloodGroup);
         }
 
         /*[HttpPost]
         public void AddInventory(Inventory inventory) { 
-            _inventoryRepository.AddInventory(inventory);
+            _unitOfWork.inventoryRepository.AddInventory(inventory);
         }*/
 
         [HttpPut]
         public void UpdateInventory(Inventory inventory)
         {
-            _inventoryRepository.UpdateInventory(inventory);
+            _unitOfWork.inventoryRepository.UpdateInventory(inventory);
         }
     }
 }
