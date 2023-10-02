@@ -15,13 +15,7 @@ namespace BloodDonationSystem.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        /*public InventoryRepository _inventoryRepository;
-
-        public InventoryController()
-        {
-            _inventoryRepository = new InventoryRepository();
-        }*/
-
+        
         [HttpGet]
         public ActionResult<List<Inventory>> GetAllInventory()
         {
@@ -34,10 +28,11 @@ namespace BloodDonationSystem.Controllers
             return _unitOfWork.inventoryRepository.GetInventoryByBloodGroup(bloodGroup);
         }
 
-        /*[HttpPost]
-        public void AddInventory(Inventory inventory) { 
+        [HttpPost]
+        public void AddInventory(Inventory inventory)
+        {
             _unitOfWork.inventoryRepository.AddInventory(inventory);
-        }*/
+        }
 
         [HttpPut]
         public void UpdateInventory(Inventory inventory)

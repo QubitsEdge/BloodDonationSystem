@@ -43,16 +43,21 @@ namespace BloodDonationSystem.Controllers
         [HttpPost]
         public void AddDonor(Donor donor)
         {
-            _unitOfWork.donorRepository.AddDonor(donor);
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.donorRepository.AddDonor(donor);
+            }
         }
 
         [HttpPut]
         public void EditDonor(Donor donor)
         {
-            Console.WriteLine(donor.DonorID);
-            _unitOfWork.donorRepository.UpdateDonor(donor);
-        }
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.donorRepository.UpdateDonor(donor);
 
+            }
+        }
         [HttpDelete("{id}")]
         public void DeleteDonor(Guid id)
         {
