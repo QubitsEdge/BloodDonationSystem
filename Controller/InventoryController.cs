@@ -43,25 +43,25 @@ namespace BloodDonationSystem.Controllers
 
 
         // POST: api/Inventory
-        /*[HttpPost]
+        [HttpPost]
         public ActionResult<Inventory> InsertInventory([FromBody] Inventory inventory)
         {
-            
-            var existingInventory = _inventoryRepository.GetByBloodGroup(inventory.BloodGroup);
+
+            var existingInventory = _unitOfWork.Inventory.GetByBloodGroup(inventory.BloodGroup);
 
             if (existingInventory != null)
             {
                 existingInventory.Quantity = inventory.Quantity;
-                _inventoryRepository.Update(existingInventory);
+                _unitOfWork.Inventory.Update(existingInventory);
             }
             else
             {
-                _inventoryRepository.Insert(inventory);
+                _unitOfWork.Inventory.Insert(inventory);
             }
 
-            _inventoryRepository.Save();
-            return CreatedAtAction(nameof(GetInventory), new { bloodGroup = inventory.BloodGroup }, inventory);
-        }*/
+            _unitOfWork.Inventory.Save();
+            return CreatedAtAction(nameof(GetInventories), new { bloodGroup = inventory.BloodGroup }, inventory);
+        }
 
 
         // PUT: api/Inventory/5
