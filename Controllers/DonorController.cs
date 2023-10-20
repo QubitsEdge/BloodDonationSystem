@@ -40,7 +40,7 @@ namespace BloodDonationSystem.Controllers
             return _unitOfWork.donorRepository.GetAllDonors();
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public void AddDonor(Donor donor)
         {
             if (ModelState.IsValid)

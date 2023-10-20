@@ -25,7 +25,13 @@ namespace BloodDonationSystem
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder.WithOrigins("http://localhost:4200") // Angular's default development server
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
             services.AddSwaggerGen(swag =>
             {
                 swag.SwaggerDoc("V1", new OpenApiInfo { Title = "Blood Donating System", Version = "V1" });
@@ -34,7 +40,8 @@ namespace BloodDonationSystem
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if(env.IsDevelopment())
+            app.UseCors("AllowOrigin");
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

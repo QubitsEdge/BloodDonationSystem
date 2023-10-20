@@ -28,13 +28,13 @@ namespace BloodDonationSystem.Controllers
             return _unitOfWork.inventoryRepository.GetInventoryByBloodGroup(bloodGroup);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public void AddInventory(Inventory inventory)
         {
             _unitOfWork.inventoryRepository.AddInventory(inventory);
-        }
+        }*/
 
-        [HttpPut]
+        [HttpPut("update")]
         public void UpdateInventory(Inventory inventory)
         {
             _unitOfWork.inventoryRepository.UpdateInventory(inventory);
